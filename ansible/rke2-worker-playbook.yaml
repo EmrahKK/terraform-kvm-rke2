@@ -1,0 +1,45 @@
+- name: Install rke2 server
+  hosts: rke2worker
+  serial: 1
+  remote_user: emrah
+  become: true
+
+  tasks:
+    - name: install rke2
+      shell: curl -sfL https://get.rke2.io | sh -
+      environment:
+        INSTALL_RKE2_VERSION: v1.22.7+rke2r1
+        INSTALL_RKE2_TYPE: agent
+      args:
+        warn: no
+
+    - name: Create rke2 directory if it does not exist
+      file:
+        path: /etc/rancher/rke2/
+        state: directory
+
+    - name: Copy rke2 agent config file
+      copy:
+        src: rke2-config/rke2-worker-config.yaml
+        dest: /etc/rancher/rke2/config.yaml
+
+    - name: Add mapping to /etc/hosts for rke2cluster.lcwdev domain
+      blockinfile:
+        path: /etc/hosts
+        block: |
+          {{ item.ip }} {{ item.name }}
+        marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.name }}"
+      loop:
+        - { name: rke2cluster.lcw.dev, ip: 192.168.122.90 }
+
+    - name: Start service rke2-agent, if not started
+      service:
+        name: rke2-agent
+        state: started
+        enabled: yes
+
+    - name: Wait for port 9345 to become open on the host, don't start checking for 20 seconds
+      wait_for:
+        port: 10250
+        delay: 20
+        timeout: 100

@@ -1,0 +1,29 @@
+- name: Set hostnames
+  hosts: all
+  serial: 1
+  remote_user: emrah
+  become: true
+
+  vars:
+    hostnames:
+      rke2lb:
+        ip: 192.168.122.90
+        hostname: rke2lb.lcw.dev
+      rke2master:
+        ip: 192.168.122.91
+        hostname: rke2master.lcw.dev
+      rke2worker1:
+        ip: 192.168.122.92
+        hostname: rke2worker1.lcw.dev
+      rke2worker2:
+        ip: 192.168.122.93
+        hostname: rke2worker2.lcw.dev
+
+  tasks:    
+    - name: Set hostname
+      shell: echo {{ item.value.hostname }} > /etc/hostname
+      when: ( ansible_ssh_host == item.value.ip )
+      loop: "{{ lookup('dict', hostnames) }}"
+
+    - name: Unconditionally reboot the machine
+      reboot:

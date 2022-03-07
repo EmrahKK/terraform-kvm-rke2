@@ -1,0 +1,4 @@
+server: https://rke2cluster.lcw.dev:9345
+token: ZqYXPWy8Aftm3QER
+node-label:
+  - "nodetype=worker"

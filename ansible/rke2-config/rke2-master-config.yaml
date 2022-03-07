@@ -1,0 +1,9 @@
+token: ZqYXPWy8Aftm3QER
+write-kubeconfig-mode: "0644"
+tls-san:
+  - "rke2cluster.lcw.dev"
+node-label:
+  - "nodetype=master"
+  - "master=true"
+node-taint:
+  - "CriticalAddonsOnly=true:NoExecute"
