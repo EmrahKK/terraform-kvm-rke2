@@ -24,7 +24,7 @@ variable "domain" { default = "lcw.dev" }
 
 variable "memoryMB" {
   type    = list(number)
-  default = [1024, 4096, 4096, 4096]
+  default = [1024, 8192, 8192, 8192]
 }
 
 variable "cpu" {
