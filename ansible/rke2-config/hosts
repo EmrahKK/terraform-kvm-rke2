@@ -2,3 +2,4 @@
 192.168.122.91 	rke2master
 192.168.122.92 	rke2worker1
 192.168.122.93	rke2worker2
+192.168.122.94	rke2worker3

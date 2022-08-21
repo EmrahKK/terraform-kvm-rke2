@@ -11,12 +11,12 @@ terraform {
 # variables that can be overriden
 variable "hostname" {
   type    = list(string)
-  default = ["rke2lb", "rke2master", "rke2worker1", "rke2worker2"]
+  default = ["rke2lb", "rke2master", "rke2worker1", "rke2worker2", "rke2worker3"]
 }
 
 variable "addresses" {
   type    = list(string)
-  default = ["192.168.122.90", "192.168.122.91", "192.168.122.92", "192.168.122.93"]
+  default = ["192.168.122.90", "192.168.122.91", "192.168.122.92", "192.168.122.93", "192.168.122.94"]
 }
 
 #variable "hostname" { default = "vm_u20" }
@@ -24,12 +24,12 @@ variable "domain" { default = "lcw.dev" }
 
 variable "memoryMB" {
   type    = list(number)
-  default = [1024, 8192, 8192, 8192]
+  default = [1024, 4096, 6144, 6144, 6144]
 }
 
 variable "cpu" {
   type    = list(number)
-  default = [1, 3, 3, 3]
+  default = [1, 3, 3, 3, 3]
 }
 
 # instance the provider

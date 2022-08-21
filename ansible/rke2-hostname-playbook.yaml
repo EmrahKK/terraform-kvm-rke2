@@ -8,16 +8,19 @@
     hostnames:
       rke2lb:
         ip: 192.168.122.90
-        hostname: rke2lb.lcw.dev
+        hostname: rke2lb
       rke2master:
         ip: 192.168.122.91
-        hostname: rke2master.lcw.dev
+        hostname: rke2master
       rke2worker1:
         ip: 192.168.122.92
-        hostname: rke2worker1.lcw.dev
+        hostname: rke2worker1
       rke2worker2:
         ip: 192.168.122.93
-        hostname: rke2worker2.lcw.dev
+        hostname: rke2worker2
+      rke2worker3:
+        ip: 192.168.122.94
+        hostname: rke2worker3
 
   tasks:    
     - name: Set hostname
